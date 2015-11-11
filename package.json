@@ -1,0 +1,12 @@
+{
+  "name": "meeting-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "slack.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "jsonfile": "^2.2.3"
+  }
+}
