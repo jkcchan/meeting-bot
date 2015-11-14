@@ -14,5 +14,29 @@
     "attendees": [
       "<@U0450NTRD>"
     ]
+  },
+  {
+    "topic": "a",
+    "date": "a",
+    "location": "b",
+    "attendees": [
+      "c",
+      "d",
+      "e",
+      "f",
+      "g"
+    ]
+  },
+  {
+    "topic": "a",
+    "date": "a",
+    "location": "b",
+    "attendees": [
+      "c",
+      "d",
+      "e",
+      "f",
+      "g"
+    ]
   }
 ]

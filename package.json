@@ -7,6 +7,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "jsonfile": "^2.2.3"
+    "jquery": "^2.1.4",
+    "jsonfile": "^2.2.3",
+    "logme": "^0.4.0",
+    "react": "^0.14.2"
   }
 }

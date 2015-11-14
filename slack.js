@@ -1,13 +1,27 @@
 var Slack = require('slack-client');
 var jsonfile = require('jsonfile');
-var express = require('express');
+var logme = require('logme');
 var file = 'meetings.json';
 var token = 'xoxb-14361485399-xSoAKzwVzrl1UMzS9A5997ng';
 var meetings = [];
+require('./webpage.js');
 jsonfile.readFile(file, function(err, obj){
     for(object in obj){
         meetings.push(obj[object]);
     }
+});
+var express = require('express');
+var app = express();
+app.get('/', function (req, res) {
+  res.send(meetings);
+  //this would go to a function that does react stuff to format a webpage
+});
+
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  logme.info('Example app listening at http://'+host+':'+port);
 });
 var slack = new Slack(token, true, true);
 
@@ -70,12 +84,18 @@ slack.on('message', function(message) {
             if(!args[1]&&!args[2]&&!args[3]){
                 channel.send("meeting (topic) (date) (location) (attendees)");
             } else {
-                var meeting={
-                    'topic':args[1],
-                    'date' : args[2],
-                    'location' : args[3],
-                    'attendees' : args[4].split(',')
-                } 
+                try{
+                    var meeting={
+                        'topic':args[1],
+                        'date' : args[2],
+                        'location' : args[3],
+                        'attendees' : args[4].split(',')
+                    } 
+                }
+                catch(err){
+                    channel.send('fail');
+                    return;
+                }
                 for (var x=0; x<meeting.attendees.length; x++){
                     if(isMention(meeting.attendees[x])){
                         meeting.attendees[x]=slack.getUserByID(meeting.attendees[x]).profile.real_name + "("+meeting.attendees[x]+")";
